@@ -55,7 +55,7 @@ namespace nap
             using (StreamWriter file = File.CreateText(currentPath + '/' + fileName))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                //serialize object directly into file stream
+                //serialize object data directly into file stream
                 serializer.Serialize(file, data);
             }
         }
