@@ -2,11 +2,20 @@
 
 namespace nap
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            /* db:
+            * I'll clean this up a bit more
+            * Shouldn't have this much going on in the main function
+            */
+
+            object configObj = Config.ReadConfig();
+            string configStr = "";
+            configStr += configObj;
+            string mp3Path = configStr + "/sample.mp3";
+            Console.WriteLine(mp3Path);
         }
     }
 }
