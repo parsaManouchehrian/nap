@@ -2,7 +2,7 @@
 
 namespace nap
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
@@ -16,6 +16,10 @@ namespace nap
             configStr += configObj;
             string mp3Path = configStr + "/sample.mp3";
             Console.WriteLine(mp3Path);
+        }
+        public static string Test()
+        {
+            return "Hello World!";
         }
     }
 }

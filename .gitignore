@@ -1,5 +1,8 @@
-/bin
-/obj
+nap/bin
+nap/obj
+nap.tests/bin
+nap.tests/obj
+nap-config.json
 .vscode
 .idea
-nap-config.json
+.sln
