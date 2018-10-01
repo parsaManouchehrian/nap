@@ -7,18 +7,22 @@ namespace nap
         public static void ParamType(string[] args)
         {
         	string flag = args[0];
+            string filePath = args[1];
 
         	switch(flag)
         	{
         		case "-pl":
-        			Console.WriteLine("call play and pass file argument");
+                    FlagMethods.Play(filePath);
         			break;
+
         		case "-st":
-        			Console.WriteLine("call stop and pass file argument");
+                    FlagMethods.Stop(filePath);
         			break;
+
         		case "-help":
-        			Console.WriteLine("eventually list all the help options");
-        			break;
+        			FlagMethods.Help();
+                    break;
+                    
         		default:
         			throw new Exception("Please Specify a valid Flag. or pass -help for options");
         	}
