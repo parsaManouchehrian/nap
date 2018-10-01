@@ -19,7 +19,7 @@ namespace nap
             string configPath = currentPath + "/nap-config.json";
 
             // Evaluates whether a config file already exists
-            bool configExists = DoesConfigExist(configPath);
+            bool configExists = DoesFileExist(configPath);
 
             if (configExists)
             {
@@ -40,10 +40,15 @@ namespace nap
             else
             {
                 configPath = GetMusicPath();
-                // Check if File Path exists
-                // Turn configExists into a generic file path validator
+                bool fileExists = DoesFileExist(configPath);
+                while (!fileExists)
+                {
+                    configPath = GetMusicPath();
+                    fileExists = DoesFileExist(configPath);
+                }
+                
+                // Hard coded song name. Needs fixing.
                 configPath += "/Zweihänder - Höllental - 01 Slay The Chopper.ogg";
-                // Console.WriteLine(configPath);
                 GenerateConfig(currentPath, configPath);
                 return "Config generated";
             }
@@ -55,16 +60,15 @@ namespace nap
             return currentPath;
         }
 
-        private static bool DoesConfigExist(string configPath)
+        // Generic Method to check if a file exists
+        private static bool DoesFileExist(string filePath)
         {
-            bool exists = File.Exists(configPath);
+            bool exists = File.Exists(filePath);
             if (exists)
             {
-                Console.WriteLine("Config file found.");
                 exists = true;
             }
             else {
-                Console.WriteLine("Config file not found.");
                 exists = false;
             }
             return exists;

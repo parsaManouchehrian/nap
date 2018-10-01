@@ -6,6 +6,13 @@ namespace nap
     {
         public static void ParamType(string[] args)
         {
+			if (args.Length == 0)
+			{
+				Console.WriteLine("Please pass in flags for the program to use.");
+				Console.WriteLine("Use the -help flag for a list of possible flags.");
+
+				throw new IndexOutOfRangeException("The number of arguments should be greater than 0.");
+			}
         	string flag = args[0];
 
         	switch(flag)
