@@ -6,17 +6,13 @@ namespace nap
     {
         private static void Main(string[] args)
         {
-            /* db:
-            * I'll clean this up a bit more
-            * Shouldn't have this much going on in the main function
-            */
+            Flag.ParamType(args);
 
             object configObj = Config.ReadConfig();
             string configStr = "";
             configStr += configObj;
-            string mp3Path = configStr + "/sample.mp3";
-            Console.WriteLine(mp3Path);
         }
+
         public static string Test()
         {
             return "Hello World!";
