@@ -21,7 +21,6 @@ namespace nap
         			break;
         		default:
         			throw new Exception("Please Specify a valid Flag. or pass -help for options");
-        			break;
         	}
         }
     }
