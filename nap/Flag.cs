@@ -6,6 +6,11 @@ namespace nap
     {
         public static void ParamType(string[] args)
         {
+            if(!args.Any())
+            {
+                ErrMsg.FlagErrMsg();
+            }
+
         	string flag = args[0];
             string filePath = args[1];
 
@@ -22,9 +27,10 @@ namespace nap
         		case "-help":
         			FlagMethods.Help();
                     break;
-                    
+
         		default:
-        			throw new Exception("Please Specify a valid Flag. or pass -help for options");
+                    ErrMsg.FlagErrMsg();
+                    break;
         	}
         }
     }
