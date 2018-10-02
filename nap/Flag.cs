@@ -7,11 +7,7 @@ namespace nap
     {
         public static void ParamType(string[] args)
         {
-            if(!args.Any())
-            {
-                ErrMsg.FlagErrMsg();
-            }
-            else if(args.Length == 1 && args[0] != "-help")
+            if(!args.Any() || args.Length == 1 && args[0] != "-help")
             {
                 ErrMsg.FlagErrMsg();
             }
