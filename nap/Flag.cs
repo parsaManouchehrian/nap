@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace nap
 {
@@ -10,18 +11,21 @@ namespace nap
             {
                 ErrMsg.FlagErrMsg();
             }
+            else if(args.Length == 1 && args[0] != "-help")
+            {
+                ErrMsg.FlagErrMsg();
+            }
 
         	string flag = args[0];
-            string filePath = args[1];
 
         	switch(flag)
         	{
         		case "-pl":
-                    FlagMethods.Play(filePath);
+                    FlagMethods.Play(args[1]);
         			break;
 
         		case "-st":
-                    FlagMethods.Stop(filePath);
+                    FlagMethods.Stop(args[1]);
         			break;
 
         		case "-help":
