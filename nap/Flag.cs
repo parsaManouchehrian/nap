@@ -13,6 +13,7 @@ namespace nap
 
 				throw new IndexOutOfRangeException("The number of arguments should be greater than 0.");
 			}
+			
         	string flag = args[0];
 
         	switch(flag)
