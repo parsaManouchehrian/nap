@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace nap
 {
@@ -6,21 +7,30 @@ namespace nap
     {
         public static void ParamType(string[] args)
         {
+            if(!args.Any() || args.Length == 1 && args[0] != "-help")
+            {
+                ErrMsg.FlagErrMsg();
+            }
+
         	string flag = args[0];
 
         	switch(flag)
         	{
         		case "-pl":
-        			Console.WriteLine("call play and pass file argument");
+                    FlagMethods.Play(args[1]);
         			break;
+
         		case "-st":
-        			Console.WriteLine("call stop and pass file argument");
+                    FlagMethods.Stop(args[1]);
         			break;
+
         		case "-help":
-        			Console.WriteLine("eventually list all the help options");
-        			break;
+        			FlagMethods.Help();
+                    break;
+
         		default:
-        			throw new Exception("Please Specify a valid Flag. or pass -help for options");
+                    ErrMsg.FlagErrMsg();
+                    break;
         	}
         }
     }
