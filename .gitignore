@@ -6,8 +6,3 @@ nap-config.json
 .vscode
 .idea
 .sln
-
-let obj = {
-    name: "dave"
-}
-"hi" + obj.name
