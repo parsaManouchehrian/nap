@@ -6,9 +6,9 @@ namespace nap
     {
         private static void Main(string[] args)
         {
-            string configStr = Config.ReadConfig();   
+            string filePath = Flag.ParamType(args);
+            string configStr = Config.ReadConfig(filePath);   
             Console.WriteLine($"Main Method: {configStr}");
-            Flag.ParamType(args);
         }
 
         public static string Test()

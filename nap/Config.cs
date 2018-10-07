@@ -13,7 +13,7 @@ namespace nap
             this.MusicPath = musicPath;
         }
         
-        public static string ReadConfig()
+        public static string ReadConfig(string filePath)
         {
             string currentPath = GetCurrentPath();
             string configPath = currentPath + "/nap-config.json";
@@ -39,16 +39,11 @@ namespace nap
             }
             else
             {
-                configPath = GetMusicPath();
-                bool fileExists = DoesFileExist(configPath);
-                while (!fileExists)
-                {
-                    configPath = GetMusicPath();
-                    fileExists = DoesFileExist(configPath);
-                }
+                bool fileExists = DoesFileExist(filePath);
+                configPath = GetMusicPath(filePath, fileExists);
                 
                 // Hard coded song name. Needs fixing.
-                configPath += "/Zweihänder - Höllental - 01 Slay The Chopper.ogg";
+                // configPath += "/bensound-creativeminds.mp3";
                 GenerateConfig(currentPath, configPath);
                 return "Config generated";
             }
@@ -74,10 +69,17 @@ namespace nap
             return exists;
         }
         
-        private static string GetMusicPath()
+        private static string GetMusicPath(string filePath, bool fileExists)
         {
-            Console.WriteLine("Type the full file path to the file you want to play");
-            string configPath = Console.ReadLine();
+            string configPath;
+            while (!fileExists)
+                {
+                    Console.WriteLine("Please use a valid path");
+                    filePath = Console.ReadLine();
+                    fileExists = DoesFileExist(filePath);
+                }
+            configPath = filePath;
+            Console.WriteLine($"ConfigPath: {configPath}");
             return configPath;
         }
 

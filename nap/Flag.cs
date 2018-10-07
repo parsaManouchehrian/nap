@@ -5,7 +5,7 @@ namespace nap
 {
     public class Flag
     {
-        public static void ParamType(string[] args)
+        public static string ParamType(string[] args)
         {
             if(!args.Any() || args.Length == 1 && args[0] != "-help")
             {
@@ -32,6 +32,7 @@ namespace nap
                     ErrMsg.FlagErrMsg();
                     break;
         	}
+            return args[1];
         }
     }
 }
