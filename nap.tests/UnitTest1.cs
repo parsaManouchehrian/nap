@@ -3,13 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace nap.tests
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void HasPath()
         {
-            string helloStr = Program.Test();
-            Assert.AreEqual("Hello World!", helloStr);
+            // TODO: Test that the file path is returned as expected
+            // Flag.ParamType();
         }
     }
 }

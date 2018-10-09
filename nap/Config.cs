@@ -7,56 +7,97 @@ namespace nap
 {
     internal class Config
     {
-        public static object ReadConfig()
+        private string MusicPath { get; set; }
+        private Config(string musicPath)
         {
-            string configPath = ConfigCheck();
-            string text = System.IO.File.ReadAllText(configPath);
-            dynamic deserializedJson = JsonConvert.DeserializeObject(text);
-            ConfigData config = new ConfigData { MusicPath = deserializedJson.Music_Path};
-            return config.MusicPath;
+            this.MusicPath = musicPath;
         }
-        private static string ConfigCheck()
+        
+        public static string ReadConfig(string filePath)
         {
             string currentPath = GetCurrentPath();
             string configPath = currentPath + "/nap-config.json";
-            Console.WriteLine(configPath);
-            bool exists = File.Exists(configPath);
-            if (exists)
+
+            // Evaluates whether a config file already exists
+            bool configExists = DoesFileExist(configPath);
+
+            if (configExists)
             {
-                Console.WriteLine("Config file found");
-                return configPath;
+                // Reads existing config
+                try
+                {
+                    string text = System.IO.File.ReadAllText(configPath);
+                    dynamic deserializedJson = JsonConvert.DeserializeObject(text);
+                    string configStr = "";
+                    configStr += deserializedJson.MusicPath;
+                    return configStr;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    throw new UnauthorizedAccessException("Unable to access file.");
+                }
             }
             else
             {
-                Console.WriteLine("No config file found");
-                configPath = GetMusicPath();
-                GenerateConfig(configPath);
-                return configPath;
+                bool fileExists = DoesFileExist(filePath);
+                configPath = GetMusicPath(filePath, fileExists);
+                
+                // Hard coded song name. Needs fixing.
+                // configPath += "/bensound-creativeminds.mp3";
+                GenerateConfig(currentPath, configPath);
+                return "Config generated";
             }
         }
 
-        private static string GetMusicPath()
-        {
-            Console.WriteLine("Type the full file path to the file you want to play");
-            string configPath = Console.ReadLine();
-            return configPath;
-        }
         private static string GetCurrentPath()
         {
             string currentPath = Directory.GetCurrentDirectory();
             return currentPath;
         }
-        private static void GenerateConfig(string configPath)
+
+        // Generic Method to check if a file exists
+        private static bool DoesFileExist(string filePath)
+        {
+            bool exists = File.Exists(filePath);
+            if (exists)
+            {
+                exists = true;
+            }
+            else {
+                exists = false;
+            }
+            return exists;
+        }
+        
+        private static string GetMusicPath(string filePath, bool fileExists)
+        {
+            string configPath;
+            while (!fileExists)
+            {
+                Console.WriteLine("Please use a valid path");
+                filePath = Console.ReadLine();
+                fileExists = DoesFileExist(filePath);
+            }
+            configPath = filePath;
+            Console.WriteLine($"ConfigPath: {configPath}");
+            return configPath;
+        }
+
+        private static void GenerateConfig(string currentPath, string configPath)
         {
             Console.WriteLine("Generating config file...");
-            var data = new List<ConfigData> {new ConfigData() {MusicPath = configPath}};
-            string currentPath = GetCurrentPath();
+            Config config = new Config(configPath){MusicPath = configPath};
+            string configText = $"{config.MusicPath}";
             string fileName = "nap-config.json";
-            using (StreamWriter file = File.CreateText(currentPath + '/' + fileName))
+            string filePath = currentPath + '/' + fileName;
+            Dictionary<string, string> configDict = new Dictionary<string, string>();
+            configDict.Add("MusicPath", config.MusicPath);
+            
+            using (StreamWriter file = File.CreateText(filePath))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 //serialize object data directly into file stream
-                serializer.Serialize(file, data);
+                serializer.Serialize(file, configDict);
             }
         }
     }

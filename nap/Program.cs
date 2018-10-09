@@ -1,21 +1,15 @@
 ﻿using System;
+using System.Linq;
 
 namespace nap
 {
     public class Program
     {
         private static void Main(string[] args)
-        {   
-            Flag.ParamType(args);
-
-            object configObj = Config.ReadConfig();
-            string configStr = "";
-            configStr += configObj;
-        }
-
-        public static string Test()
         {
-            return "Hello World!";
+            Flag.ParamType(args);
+            string configStr = Config.ReadConfig(args.Last());
+            Console.WriteLine($"Main Method: {configStr}");
         }
     }
 }

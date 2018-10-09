@@ -11,7 +11,7 @@ namespace nap
             {
                 ErrMsg.FlagErrMsg();
             }
-
+            // Change to handle multiple flags
         	string flag = args[0];
 
         	switch(flag)
