@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace nap
 {
@@ -6,14 +7,9 @@ namespace nap
     {
         private static void Main(string[] args)
         {
-            string filePath = Flag.ParamType(args);
-            string configStr = Config.ReadConfig(filePath);   
+            Flag.ParamType(args);
+            string configStr = Config.ReadConfig(args.Last());
             Console.WriteLine($"Main Method: {configStr}");
-        }
-
-        public static string Test()
-        {
-            return "Hello World!";
         }
     }
 }

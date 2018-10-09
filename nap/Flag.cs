@@ -5,13 +5,13 @@ namespace nap
 {
     public class Flag
     {
-        public static string ParamType(string[] args)
+        public static void ParamType(string[] args)
         {
             if(!args.Any() || args.Length == 1 && args[0] != "-help")
             {
                 ErrMsg.FlagErrMsg();
             }
-
+            // Change to handle multiple flags
         	string flag = args[0];
 
         	switch(flag)
@@ -32,7 +32,6 @@ namespace nap
                     ErrMsg.FlagErrMsg();
                     break;
         	}
-            return args[1];
         }
     }
 }
