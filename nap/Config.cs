@@ -73,11 +73,11 @@ namespace nap
         {
             string configPath;
             while (!fileExists)
-                {
-                    Console.WriteLine("Please use a valid path");
-                    filePath = Console.ReadLine();
-                    fileExists = DoesFileExist(filePath);
-                }
+            {
+                Console.WriteLine("Please use a valid path");
+                filePath = Console.ReadLine();
+                fileExists = DoesFileExist(filePath);
+            }
             configPath = filePath;
             Console.WriteLine($"ConfigPath: {configPath}");
             return configPath;
