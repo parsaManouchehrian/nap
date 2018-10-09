@@ -9,9 +9,9 @@ namespace nap
             Console.WriteLine(filePath);
         }
 
-        public static void Stop(string filePath)
+        public static void Stop()
         {
-            Console.WriteLine(filePath);
+            Console.WriteLine("called stop method");
         }
 
         public static void Help()
